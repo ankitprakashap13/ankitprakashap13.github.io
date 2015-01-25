@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Spritly</title>
+	<title></title>
+	<style type="text/css">
+	.wolf{
+		background: url(wolf.jpg) no-repeat;
+		background-position: 0 0;
+		height: 360px;
+		width: 150px;
+	}
+	.block{
+		text-align: center;
+		background: #333;
+		padding: 50px 0;
+		width: 80%;
+		margin: 0 auto;
+	}
+	h1, h3{
+		text-align: center;
+	}
+	h3 span{
+		font-size: 30px;
+	}
+	</style>
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>Spritly</h1>
+	<h1>SPRITE Clear Hai !! ?</h1>
+	<hr />
+	<div>
+	<div class="block">
+		<img class="wolf" src="" />
+		<img class="wolf" src="" />
+		<img class="wolf" src="" />
+	</div>
+	<script src="jquery.spritely.js"></script>
+	<hr />
+	<h3> Hope See you all at <SPAN>MAGNOLIA</SPAN> 4PM ! </h3>
+	<script type="text/javascript">
+	$('.wolf').sprite({fps: 2, no_of_frames: 8});
+	</script>
 </body>
 </html>
