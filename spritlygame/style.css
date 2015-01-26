@@ -1,0 +1,45 @@
+#stage{
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+.stage{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 460px;
+	overflow: hidden;
+}
+#block{
+	background: url(backgroundimge.png) 0 0 repeat-x;
+}
+#boy{
+	background: url(scottpilgrim_multiple.png) 0 0 no-repeat;
+	width: 108px;
+	height: 140px;
+	top: 330px;
+	left: 100px;
+}
+.wrapper{
+	position: relative;
+	height: 461px;
+}
+#hurdle{
+	background: url(hurdle.png) 0 0 repeat-x;
+	top: 400px;
+}
+.gameon{
+	float: left
+}
+h1, h3{
+	text-align: center;
+}
+input{
+	display: table;
+	margin: 10px auto;
+	height: 20px;
+}
+p{
+	text-align: center;
+}
