@@ -32,6 +32,6 @@
 					$('#boy').animate({"top": "-=100px"}, "slow");
 					$('#boy').animate({"top": "+=100px"}, "slow");
 				});
-			});			
+			});
 		});
 })(jQuery);
