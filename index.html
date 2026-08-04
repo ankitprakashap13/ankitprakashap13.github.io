@@ -154,7 +154,7 @@
 .ap-cross span{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
 .ap-cross:hover span{transform:translateX(5px)}
 .ap-matrix{padding:clamp(50px,7vw,96px) 0}
-.ap-mgrid{display:grid;grid-template-columns:minmax(96px,150px) repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
+.ap-mgrid{display:grid;grid-template-columns:minmax(96px,150px) repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
 .ap-mcell{background:var(--ink);padding:13px 10px;min-height:52px;display:flex;align-items:center;justify-content:center;position:relative}
 .ap-mcell--h{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.3;flex-direction:column;gap:3px}
 .ap-mcell--r{justify-content:flex-start;font-size:12px;letter-spacing:.08em;color:var(--paper);text-align:left;padding-left:14px}
@@ -187,7 +187,7 @@
 @supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){.ap-node,.ap-scol,.ap-card,.ap-two>div,.ap-gantt-head,.ap-mgrid{animation:apReveal linear both;animation-timeline:view();animation-range:entry 0% entry 62%}}}
 @keyframes apReveal{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.ap *{animation:none!important;transition:none!important}.ap-bar,.ap-dot i{opacity:1!important;transform:none!important}}
-@media (max-width:800px){.ap-forkgrid{grid-template-columns:1fr}.ap-divide{width:auto;height:1px}.ap-card--ai{text-align:left}.ap-card--ai .ap-card-ico,.ap-card--ai .ap-card-d{margin-left:0}.ap-mgrid{grid-template-columns:minmax(84px,1fr) repeat(5,1fr)}.ap-mcell{padding:9px 5px;min-height:44px}.ap-mcell--r{padding-left:9px;font-size:11px}}
+@media (max-width:800px){.ap-forkgrid{grid-template-columns:1fr}.ap-divide{width:auto;height:1px}.ap-card--ai{text-align:left}.ap-card--ai .ap-card-ico,.ap-card--ai .ap-card-d{margin-left:0}.ap-mgrid{grid-template-columns:minmax(72px,1fr) repeat(5,minmax(0,1fr))}.ap-mcell{padding:9px 5px;min-height:44px}.ap-mcell--r{padding-left:9px;font-size:11px}}
 .ap-forkline{font-family:var(--serif);font-weight:400;font-size:clamp(25px,3.3vw,46px);line-height:1.14;letter-spacing:-.01em;margin:0 auto 8px;max-width:24ch;color:var(--paper)}
 .ap-forkline .e{color:var(--eng)}
 .ap-forkline .s{color:var(--ai)}
@@ -198,18 +198,19 @@
 .ap-scrollwrap::-webkit-scrollbar-track{background:rgba(234,234,239,.06);border-radius:99px}
 .ap-scrollwrap::-webkit-scrollbar-thumb{background:rgba(234,234,239,.3);border-radius:99px}
 .ap-scrollwrap::-webkit-scrollbar-thumb:hover{background:rgba(234,234,239,.5)}
-.ap-scrollwrap>svg{direction:ltr;display:block;max-width:none}
+.ap-scrollwrap>svg{direction:ltr;display:block;width:100%;min-width:880px;height:auto;max-width:none}
+
 .ap-chart{overflow:visible}
-.ap-gco{font-family:var(--serif);font-size:17px;fill:var(--paper)}
-.ap-gdate{font-family:var(--sans);font-size:10px;fill:var(--muted);letter-spacing:.14em}
-.ap-gentry{font-family:var(--sans);font-size:11.5px;fill:#8A8A96}
-.ap-gexit{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.01em}
-.ap-gpromo{font-family:var(--sans);font-size:10px;fill:#91B4DA;letter-spacing:.12em;text-transform:uppercase}
-.ap-gtick{stroke:#0A1520;stroke-width:2}
+.ap-gco{font-family:var(--serif);font-size:14px;fill:var(--paper)}
+.ap-gdate{font-family:var(--sans);font-size:9.5px;fill:var(--muted);letter-spacing:.1em}
+.ap-gentry{font-family:var(--sans);font-size:10.5px;fill:#8A8A96}
+.ap-gexit{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.01em}
+.ap-gpromo{font-family:var(--sans);font-size:9px;fill:#91B4DA;letter-spacing:.1em;text-transform:uppercase}
+.ap-gtick{stroke:#0A1520;stroke-width:1.6}
 .ap-gnow{fill:none;stroke:#C6A8E9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ap-gdash{stroke:rgba(198,168,233,.4);stroke-width:1;stroke-dasharray:3 5}
-.ap-gedu{font-family:var(--serif);font-size:14px;fill:var(--paper)}
-.ap-gedusub{font-family:var(--sans);font-size:9.5px;fill:var(--muted);letter-spacing:.11em}
+.ap-gedu{font-family:var(--serif);font-size:12.5px;fill:var(--paper)}
+.ap-gedusub{font-family:var(--sans);font-size:8.5px;fill:var(--muted);letter-spacing:.08em}
 .ap-gedulab{font-family:var(--sans);font-size:9.5px;fill:rgba(234,234,239,.35);letter-spacing:.2em}
 .ap-gyear{font-family:var(--sans);font-size:10px;fill:var(--muted);letter-spacing:.1em}
 .ap-scrollhint{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:6px 0 0;display:flex;align-items:center;gap:11px}
@@ -250,58 +251,50 @@
 </section>
 <section class="ap-gantt">
 <div class="ap-gantt-head">
-<div><p class="ap-eyebrow preFlex flexIn" style="transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.65s;">the shape of it</p><h2 class="ap-h2 preFlex flexIn" style="transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.65s;">Thirteen years,<br>five companies.</h2></div>
-<p class="ap-lede preFlex flexIn" style="transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.65s;">From a metallurgy degree to legal data to incident intelligence — where each road started, and what I was by the time I left.</p>
+<div><p class="ap-eyebrow">the shape of it</p><h2 class="ap-h2">Thirteen years,<br>five companies.</h2></div>
+<p class="ap-lede">From a metallurgy degree to legal data to incident intelligence &mdash; where each road started, and what I was by the time I left.</p>
 </div>
 <div class="ap-scrollwrap">
-<svg class="ap-chart" width="2460" height="605" viewBox="0 0 2460 605" role="img" aria-label="Career timeline 2013 to 2027 across five companies and two degrees">
+<svg class="ap-chart" viewBox="0 0 1200 455" role="img" aria-label="Career timeline 2013 to 2027 across five companies and two degrees">
 <g>
-<line class="ap-gline" x1="100" y1="40" x2="100" y2="560"></line><line class="ap-gline" x1="260" y1="40" x2="260" y2="560"></line><line class="ap-gline" x1="420" y1="40" x2="420" y2="560"></line><line class="ap-gline" x1="580" y1="40" x2="580" y2="560"></line><line class="ap-gline" x1="740" y1="40" x2="740" y2="560"></line><line class="ap-gline" x1="900" y1="40" x2="900" y2="560"></line><line class="ap-gline" x1="1060" y1="40" x2="1060" y2="560"></line><line class="ap-gline" x1="1220" y1="40" x2="1220" y2="560"></line><line class="ap-gline" x1="1380" y1="40" x2="1380" y2="560"></line><line class="ap-gline" x1="1540" y1="40" x2="1540" y2="560"></line><line class="ap-gline" x1="1700" y1="40" x2="1700" y2="560"></line><line class="ap-gline" x1="1860" y1="40" x2="1860" y2="560"></line><line class="ap-gline" x1="2020" y1="40" x2="2020" y2="560"></line><line class="ap-gline" x1="2180" y1="40" x2="2180" y2="560"></line><line class="ap-gline" x1="2340" y1="40" x2="2340" y2="560"></line>
+<line class="ap-gline" x1="50" y1="28" x2="50" y2="414"/><line class="ap-gline" x1="130" y1="28" x2="130" y2="414"/><line class="ap-gline" x1="210" y1="28" x2="210" y2="414"/><line class="ap-gline" x1="290" y1="28" x2="290" y2="414"/><line class="ap-gline" x1="370" y1="28" x2="370" y2="414"/><line class="ap-gline" x1="450" y1="28" x2="450" y2="414"/><line class="ap-gline" x1="530" y1="28" x2="530" y2="414"/><line class="ap-gline" x1="610" y1="28" x2="610" y2="414"/><line class="ap-gline" x1="690" y1="28" x2="690" y2="414"/><line class="ap-gline" x1="770" y1="28" x2="770" y2="414"/><line class="ap-gline" x1="850" y1="28" x2="850" y2="414"/><line class="ap-gline" x1="930" y1="28" x2="930" y2="414"/><line class="ap-gline" x1="1010" y1="28" x2="1010" y2="414"/><line class="ap-gline" x1="1090" y1="28" x2="1090" y2="414"/><line class="ap-gline" x1="1170" y1="28" x2="1170" y2="414"/>
 </g>
 <g>
-<text class="ap-gyear" x="100" y="582" text-anchor="middle">2013</text><text class="ap-gyear" x="260" y="582" text-anchor="middle">2014</text><text class="ap-gyear" x="420" y="582" text-anchor="middle">2015</text><text class="ap-gyear" x="580" y="582" text-anchor="middle">2016</text><text class="ap-gyear" x="740" y="582" text-anchor="middle">2017</text><text class="ap-gyear" x="900" y="582" text-anchor="middle">2018</text><text class="ap-gyear" x="1060" y="582" text-anchor="middle">2019</text><text class="ap-gyear" x="1220" y="582" text-anchor="middle">2020</text><text class="ap-gyear" x="1380" y="582" text-anchor="middle">2021</text><text class="ap-gyear" x="1540" y="582" text-anchor="middle">2022</text><text class="ap-gyear" x="1700" y="582" text-anchor="middle">2023</text><text class="ap-gyear" x="1860" y="582" text-anchor="middle">2024</text><text class="ap-gyear" x="2020" y="582" text-anchor="middle">2025</text><text class="ap-gyear" x="2180" y="582" text-anchor="middle">2026</text><text class="ap-gyear" x="2340" y="582" text-anchor="middle">2027</text>
+<text class="ap-gyear" x="50" y="434" text-anchor="middle">2013</text><text class="ap-gyear" x="130" y="434" text-anchor="middle">2014</text><text class="ap-gyear" x="210" y="434" text-anchor="middle">2015</text><text class="ap-gyear" x="290" y="434" text-anchor="middle">2016</text><text class="ap-gyear" x="370" y="434" text-anchor="middle">2017</text><text class="ap-gyear" x="450" y="434" text-anchor="middle">2018</text><text class="ap-gyear" x="530" y="434" text-anchor="middle">2019</text><text class="ap-gyear" x="610" y="434" text-anchor="middle">2020</text><text class="ap-gyear" x="690" y="434" text-anchor="middle">2021</text><text class="ap-gyear" x="770" y="434" text-anchor="middle">2022</text><text class="ap-gyear" x="850" y="434" text-anchor="middle">2023</text><text class="ap-gyear" x="930" y="434" text-anchor="middle">2024</text><text class="ap-gyear" x="1010" y="434" text-anchor="middle">2025</text><text class="ap-gyear" x="1090" y="434" text-anchor="middle">2026</text><text class="ap-gyear" x="1170" y="434" text-anchor="middle">2027</text>
 </g>
 
-<text class="ap-gco" x="353" y="46">Thomson Reuters</text>
-<text class="ap-gdate" x="353" y="63">AUG ’14 — JAN ’16 · BANGALORE</text>
-<rect class="ap-bar" style="animation-delay:.05s" x="353" y="74" width="227" height="22" rx="4" fill="#3E5D7D"></rect>
-<text class="ap-gexit" x="580" y="113" text-anchor="end" fill="#7E9AB8">left as Web Developer</text>
+<text class="ap-gco" x="177" y="47">Thomson Reuters<tspan class="ap-gdate" dx="9">AUG &#8217;14 &#8212; JAN &#8217;16</tspan></text>
+<rect class="ap-bar" style="animation-delay:.05s" x="177" y="56" width="113" height="16" rx="3" fill="#3E5D7D"/>
+<text class="ap-gexit" x="177" y="87" fill="#7E9AB8">left as Web Developer</text>
 
-<text class="ap-gco" x="580" y="134">Healthi</text>
-<text class="ap-gdate" x="580" y="151">JAN ’16 — JUL ’18 · BANGALORE</text>
-<rect class="ap-bar" style="animation-delay:.14s" x="580" y="162" width="400" height="22" rx="4" fill="#4E7398"></rect>
-<text class="ap-gexit" x="980" y="201" text-anchor="end" fill="#88A9C6">left as Software Developer</text>
+<text class="ap-gco" x="290" y="115">Healthi<tspan class="ap-gdate" dx="9">JAN &#8217;16 &#8212; JUL &#8217;18</tspan></text>
+<rect class="ap-bar" style="animation-delay:.14s" x="290" y="124" width="200" height="16" rx="3" fill="#4E7398"/>
+<text class="ap-gexit" x="290" y="155" fill="#88A9C6">left as Software Developer</text>
 
-<text class="ap-gco" x="980" y="222">Razorpay</text>
-<text class="ap-gdate" x="980" y="239">JUL ’18 — OCT ’20 · BANGALORE</text>
-<rect class="ap-bar" style="animation-delay:.23s" x="980" y="250" width="360" height="22" rx="4" fill="#6690B8"></rect>
-<text class="ap-gexit" x="1340" y="289" text-anchor="end" fill="#9DB9D6">left as Principal Engineer</text>
+<text class="ap-gco" x="490" y="183">Razorpay<tspan class="ap-gdate" dx="9">JUL &#8217;18 &#8212; OCT &#8217;20</tspan></text>
+<rect class="ap-bar" style="animation-delay:.23s" x="490" y="192" width="180" height="16" rx="3" fill="#6690B8"/>
+<text class="ap-gexit" x="490" y="223" fill="#9DB9D6">left as Principal Engineer</text>
 
-<text class="ap-gco" x="1353" y="310">Oracle</text>
-<text class="ap-gdate" x="1353" y="327">NOV ’20 — JAN ’26 · BANGALORE</text>
-<text class="ap-gpromo" x="1864" y="327">promoted to manager · dec 2023</text>
-<rect class="ap-bar" style="animation-delay:.32s" x="1353" y="338" width="827" height="22" rx="4" fill="#91B4DA"></rect>
-<line class="ap-gtick" x1="1853" y1="332" x2="1853" y2="366"></line>
-<text class="ap-gentry" x="1353" y="377">joined as Senior Software Engineer</text>
-<text class="ap-gexit" x="2180" y="377" text-anchor="end" fill="#B6D0EA">left as Manager of Software Development</text>
+<text class="ap-gco" x="677" y="251">Oracle<tspan class="ap-gdate" dx="9">NOV &#8217;20 &#8212; JAN &#8217;26</tspan></text>
+<text class="ap-gpromo" x="936" y="251">promoted &#183; dec &#8217;23</text>
+<rect class="ap-bar" style="animation-delay:.32s" x="677" y="260" width="413" height="16" rx="3" fill="#91B4DA"/>
+<line class="ap-gtick" x1="927" y1="256" x2="927" y2="280"/>
+<text class="ap-gentry" x="677" y="291">joined as Senior Software Engineer <tspan class="ap-gexit" fill="#B6D0EA">&#8594; left as Manager of Software Development</tspan></text>
 
-<text class="ap-gco" x="2180" y="398">Atlassian</text>
-<text class="ap-gdate" x="2180" y="415">JAN ’26 — NOW · BANGALORE</text>
-<rect class="ap-bar" style="animation-delay:.41s" x="2180" y="426" width="120" height="22" rx="4" fill="#C6A8E9"></rect>
-<path class="ap-gnow" d="M2312 429l10 8-10 8"></path>
-<text class="ap-gexit" x="2180" y="465" fill="#D3BCF0">here now · Senior Software Engineer</text>
+<text class="ap-gco" x="1170" y="319" text-anchor="end">Atlassian<tspan class="ap-gdate" dx="9">JAN &#8217;26 &#8212; NOW</tspan></text>
+<rect class="ap-bar" style="animation-delay:.41s" x="1090" y="328" width="60" height="16" rx="3" fill="#C6A8E9"/>
+<path class="ap-gnow" d="M1157 331l7 5-7 5"/>
+<text class="ap-gexit" x="1170" y="359" text-anchor="end" fill="#D3BCF0">here now &#183; Senior Software Engineer</text>
 
-<text class="ap-gedulab" x="100" y="500">EDUCATION</text>
-<line class="ap-gdash" x1="1860" y1="362" x2="1860" y2="516"></line>
-<circle class="ap-edudot" cx="180" cy="524" r="5" fill="none" stroke="#EAEAEF" stroke-width="1.5"></circle>
-<text class="ap-gedu" x="194" y="520">B.Tech, Metallurgical &amp; Materials Engineering</text>
-<text class="ap-gedusub" x="194" y="537">NIT TRICHY · GRADUATED 2013</text>
-<circle class="ap-edudot" cx="1860" cy="524" r="5" fill="none" stroke="#C6A8EA" stroke-width="1.5"></circle>
-<text class="ap-gedu" x="1874" y="520">Master of Data Science</text>
-<text class="ap-gedusub" x="1874" y="537">DEAKIN UNIVERSITY, MELBOURNE · 2024 · STUDIED WHILE AT ORACLE</text>
+<text class="ap-gedulab" x="50" y="374">EDUCATION</text>
+<line class="ap-gdash" x1="930" y1="280" x2="930" y2="388"/>
+<circle class="ap-edudot" cx="50" cy="396" r="4.5" fill="none" stroke="#EAEAEF" stroke-width="1.4"/>
+<text class="ap-gedu" x="62" y="400">B.Tech, Metallurgical &amp; Materials Engineering<tspan class="ap-gedusub" dx="8">NIT TRICHY &#183; 2013</tspan></text>
+<circle class="ap-edudot" cx="930" cy="396" r="4.5" fill="none" stroke="#C6A8EA" stroke-width="1.4"/>
+<text class="ap-gedu" x="942" y="400">Master of Data Science<tspan class="ap-gedusub" dx="8">DEAKIN &#183; 2024</tspan></text>
 </svg>
 </div>
-<p class="ap-scrollhint preFlex flexIn" style="transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.65s;"><i></i> drag or scroll the timeline — it opens on where I am now</p>
+<p class="ap-scrollhint"><i></i> swipe the timeline &mdash; it opens on where I am now</p>
 <div class="ap-legend"><span><i style="background:#3E5D7D"></i>legal tech</span><span><i style="background:#4E7398"></i>healthcare</span><span><i style="background:#6690B8"></i>fintech</span><span><i style="background:#91B4DA"></i>cloud infrastructure</span><span><i style="background:#C6A8E9"></i>service management &amp; AI</span></div>
 </section>
 <section class="ap-track ap-track--eng" id="track-eng">
@@ -700,6 +693,6 @@
     }
   </style><style class="transform-overrides-vars">
     
-  </style>
+  @media (min-width:940px){.ap-scrollwrap{overflow-x:hidden;padding-bottom:0}.ap-scrollhint{display:none}}@media (max-width:640px){.ap-mcell--h{font-size:8.5px;letter-spacing:.02em;overflow-wrap:break-word;hyphens:auto}}</style>
 </body>
 </html>
